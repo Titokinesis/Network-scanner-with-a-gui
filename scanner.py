@@ -6,7 +6,7 @@ import customtkinter as ctk
 import nmap
 import pandas as pd
 
-# Set the modern dark aesthetic
+#Setting a dark aesthetic theme
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
 
@@ -20,7 +20,7 @@ class ScannerApp(ctk.CTk):
         self.create_widgets()
 
     def create_widgets(self):
-        # Header text
+        #Header text
         self.header_label = ctk.CTkLabel(
             self, 
             text="NETWORK VULNERABILITY SCANNER", 
@@ -28,7 +28,7 @@ class ScannerApp(ctk.CTk):
         )
         self.header_label.pack(pady=(20, 10))
 
-        # Top Control Panel
+        #Top Control Panel
         control_frame = ctk.CTkFrame(self, corner_radius=10)
         control_frame.pack(pady=10, padx=20, fill="x")
 
@@ -39,13 +39,13 @@ class ScannerApp(ctk.CTk):
             height=40
         )
         self.target_entry.pack(side="left", padx=20, pady=20)
-        self.target_entry.insert(0, "scanme.nmap.org")
+        self.target_entry.insert(0, "")
 
         self.scan_btn = ctk.CTkButton(
             control_frame, 
-            text="INITIATE SCAN", 
+            text="START SCAN", 
             command=self.start_scan, 
-            fg_color="#E63946", # Aggressive red color for the scanner
+            fg_color="#E63946", # Red color for the scanner
             hover_color="#9B2226",
             height=40,
             font=ctk.CTkFont(weight="bold")
@@ -62,7 +62,7 @@ class ScannerApp(ctk.CTk):
         )
         self.export_btn.pack(side="left", padx=10)
 
-        # Style the standard Treeview table to match the Dark Mode theme
+        #Styling the standard Treeview table to match the Dark Mode theme
         style = ttk.Style()
         style.theme_use("default")
         style.configure("Treeview", 
@@ -77,7 +77,7 @@ class ScannerApp(ctk.CTk):
                         foreground="white",
                         font=("Arial", 10, "bold"))
 
-        # Data Table Container
+        #The data Table Container
         table_frame = ctk.CTkFrame(self, corner_radius=10)
         table_frame.pack(pady=10, padx=20, fill="both", expand=True)
 
@@ -90,7 +90,7 @@ class ScannerApp(ctk.CTk):
 
         self.tree.pack(side="left", fill="both", expand=True, padx=10, pady=10)
 
-        # Status Bar
+        #The status Bar
         self.status_var = ctk.StringVar(value="System Ready. Waiting for target input.")
         self.status_bar = ctk.CTkLabel(
             self, 
@@ -108,7 +108,7 @@ class ScannerApp(ctk.CTk):
         self.export_btn.configure(state="disabled")
         self.status_var.set(f"Executing active scan on {target}... (Please wait)")
         
-        # Clear old data
+        #Clearing old data
         for item in self.tree.get_children():
             self.tree.delete(item)
         self.scan_data.clear()
